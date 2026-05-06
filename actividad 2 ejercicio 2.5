@@ -1,0 +1,84 @@
+class CuentaBancaria:
+
+    def __init__(self, nombres, apellidos, numero_cuenta, tipo_cuenta, interes_mensual):
+        self.nombres = nombres
+        self.apellidos = apellidos
+        self.numero_cuenta = numero_cuenta
+        self.tipo_cuenta = tipo_cuenta
+        self.saldo = 0
+        self.interes_mensual = interes_mensual
+
+    def mostrar_datos(self):
+        print("\n--- DATOS DE LA CUENTA ---")
+        print("Titular:", self.nombres, self.apellidos)
+        print("Número de cuenta:", self.numero_cuenta)
+        print("Tipo de cuenta:", self.tipo_cuenta)
+        print("Saldo actual:", self.saldo)
+        print("Interés mensual:", self.interes_mensual, "%")
+
+    def consultar_saldo(self):
+        print("Saldo disponible:", self.saldo)
+
+    def consignar(self, valor):
+        if valor > 0:
+            self.saldo += valor
+            print("Consignación realizada.")
+        else:
+            print("Valor inválido.")
+
+    def retirar(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+            print("Retiro realizado.")
+        else:
+            print("Fondos insuficientes.")
+
+    def aplicar_interes(self):
+        interes = self.saldo * (self.interes_mensual / 100)
+        self.saldo += interes
+        print("Interés aplicado:", round(interes, 2))
+
+print("Ingrese los datos de la cuenta bancaria")
+
+nombres = input("Nombres: ")
+apellidos = input("Apellidos: ")
+numero_cuenta = input("Número de cuenta: ")
+tipo_cuenta = input("Tipo de cuenta (Ahorros/Corriente): ")
+interes = float(input("Interés mensual (%): "))
+
+cuenta = CuentaBancaria(nombres, apellidos, numero_cuenta, tipo_cuenta, interes)
+
+while True:
+    print("\n--- MENÚ ---")
+    print("1. Mostrar datos")
+    print("2. Consultar saldo")
+    print("3. Consignar")
+    print("4. Retirar")
+    print("5. Aplicar interés")
+    print("6. Salir")
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        cuenta.mostrar_datos()
+
+    elif opcion == "2":
+        cuenta.consultar_saldo()
+
+    elif opcion == "3":
+        valor = float(input("Valor a consignar: "))
+        cuenta.consignar(valor)
+
+    elif opcion == "4":
+        valor = float(input("Valor a retirar: "))
+        cuenta.retirar(valor)
+
+    elif opcion == "5":
+        cuenta.aplicar_interes()
+
+    elif opcion == "6":
+        print("Saliendo...")
+        break
+
+    else:
+        print("Opción inválida.")
