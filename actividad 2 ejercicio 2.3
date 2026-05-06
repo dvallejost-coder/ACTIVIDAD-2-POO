@@ -1,0 +1,139 @@
+class Automovil:
+
+    def __init__(self, marca, modelo, motor, combustible, tipo,
+                 puertas, asientos, vel_max, color, automatico):
+
+        self.marca = marca
+        self.modelo = modelo
+        self.motor = motor
+        self.combustible = combustible
+        self.tipo = tipo
+        self.puertas = puertas
+        self.asientos = asientos
+        self.vel_max = vel_max
+        self.color = color
+        self.automatico = automatico
+
+        self.vel_actual = 0
+        self.multas = 0
+        self.valor_multa = 500000   # valor por cada multa
+
+
+
+    def get_marca(self):
+        return self.marca
+
+    def get_velocidad_actual(self):
+        return self.vel_actual
+
+    def get_automatico(self):
+        return self.automatico
+
+
+
+    def set_color(self, color):
+        self.color = color
+
+    def set_automatico(self, automatico):
+        self.automatico = automatico
+
+
+
+    def acelerar(self, incremento):
+        if self.vel_actual + incremento <= self.vel_max:
+            self.vel_actual += incremento
+        else:
+            print("Se superó la velocidad máxima.")
+            print("⚠ Se generó una multa.")
+            self.multas += 1
+
+    def desacelerar(self, disminucion):
+        if self.vel_actual - disminucion >= 0:
+            self.vel_actual -= disminucion
+        else:
+            print("No se puede tener velocidad negativa.")
+
+    def frenar(self):
+        self.vel_actual = 0
+
+    def tiempo_llegada(self, distancia):
+        if self.vel_actual > 0:
+            tiempo = distancia / self.vel_actual
+            print("Tiempo estimado:", round(tiempo, 2), "horas")
+        else:
+            print("El automóvil está detenido.")
+
+    def tiene_multas(self):
+        if self.multas > 0:
+            return True
+        else:
+            return False
+
+    def total_multas(self):
+        return self.multas * self.valor_multa
+
+    def mostrar_datos(self):
+        print("Marca:", self.marca)
+        print("Modelo:", self.modelo)
+        print("Motor:", self.motor, "L")
+        print("Combustible:", self.combustible)
+        print("Tipo:", self.tipo)
+        print("Puertas:", self.puertas)
+        print("Asientos:", self.asientos)
+        print("Velocidad máxima:", self.vel_max, "km/h")
+        print("Color:", self.color)
+        print("Automático:", self.automatico)
+        print("Velocidad actual:", self.vel_actual, "km/h")
+        print("Cantidad de multas:", self.multas)
+
+
+
+
+print("Ingrese los datos del automóvil")
+
+marca = input("Marca: ")
+modelo = input("Modelo: ")
+motor = float(input("Motor (litros): "))
+combustible = input("Combustible: ")
+tipo = input("Tipo de automóvil: ")
+puertas = int(input("Número de puertas: "))
+asientos = int(input("Cantidad de asientos: "))
+vel_max = int(input("Velocidad máxima: "))
+color = input("Color: ")
+automatico = input("¿Es automático? (Si/No): ")
+
+carro = Automovil(marca, modelo, motor, combustible, tipo,
+                  puertas, asientos, vel_max, color, automatico)
+
+print("\nDATOS DEL AUTOMÓVIL")
+carro.mostrar_datos()
+
+print("\nVelocidad inicial en 100 km/h")
+carro.acelerar(100)
+print("Velocidad actual:", carro.get_velocidad_actual())
+
+print("\nAumentar 20 km/h")
+carro.acelerar(20)
+print("Velocidad actual:", carro.get_velocidad_actual())
+
+print("\nIntentar superar velocidad máxima")
+carro.acelerar(300)
+
+print("\nDisminuir 50 km/h")
+carro.desacelerar(50)
+print("Velocidad actual:", carro.get_velocidad_actual())
+
+print("\nFrenar")
+carro.frenar()
+print("Velocidad actual:", carro.get_velocidad_actual())
+
+distancia = float(input("\nIngrese distancia a recorrer (km): "))
+carro.acelerar(60)
+carro.tiempo_llegada(distancia)
+
+print("\n--- MULTAS ---")
+if carro.tiene_multas():
+    print("El vehículo tiene multas.")
+    print("Valor total multas: $", carro.total_multas())
+else:
+    print("El vehículo no tiene multas.")
