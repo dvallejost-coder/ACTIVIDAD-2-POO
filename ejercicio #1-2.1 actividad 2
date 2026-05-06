@@ -1,0 +1,60 @@
+class Persona:
+
+    def __init__(self, nombre, apellido, documento, año_nacimiento, pais_nacimiento, genero):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.documento = documento
+        self.año_nacimiento = año_nacimiento
+        self.pais_nacimiento = pais_nacimiento
+        self.genero = genero
+
+    def mostrar_datos(self):
+        print("\n_____ Datos de la persona _____")
+        print("Nombre:", self.nombre)
+        print("Apellido:", self.apellido)
+        print("Documento:", self.documento)
+        print("Año de nacimiento:", self.año_nacimiento)
+        print("País de nacimiento:", self.pais_nacimiento)
+        print("Género:", self.genero)
+        print(".......................")
+
+def crear_persona():
+
+    nombre = input("Ingrese nombre: ")
+    apellido = input("Ingrese apellido: ")
+    #documento = input("Ingrese el numero de documento: ")
+    while True:
+        try:
+            documento = int(input("Ingrese el numero de documento: "))
+            break
+        except ValueError:
+            print("Error: ingrese un número válido")
+    while True:
+        try:
+            año_nacimiento = int(input("Ingrese año de nacimiento: "))
+            break
+        except ValueError:
+            print("Error: ingrese un número válido")
+
+    pais_nacimiento = input("Ingrese país de nacimiento: ")
+
+    while True:
+        genero = input("Ingrese género (H/M): ").upper()
+
+        if genero in ["H", "M"]:
+            break
+        else:
+            print("Error: solo se permite 'H' o 'M'")
+
+    return Persona(nombre, apellido, documento, año_nacimiento, pais_nacimiento, genero)
+
+if __name__ == "__main__":
+
+    print("Ingrese datos de la primera persona:")
+    persona1 = crear_persona()
+
+    print("\nIngrese datos de la segunda persona:")
+    persona2 = crear_persona()
+
+    persona1.mostrar_datos()
+    persona2.mostrar_datos()
