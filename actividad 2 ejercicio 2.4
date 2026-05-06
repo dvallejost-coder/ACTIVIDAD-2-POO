@@ -1,0 +1,130 @@
+import math
+
+class Circulo:
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return math.pi * self.radio ** 2
+
+    def perimetro(self):
+        return 2 * math.pi * self.radio
+
+class Rectangulo:
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def area(self):
+        return self.base * self.altura
+
+    def perimetro(self):
+        return 2 * (self.base + self.altura)
+
+class Cuadrado:
+    def __init__(self, lado):
+        self.lado = lado
+
+    def area(self):
+        return self.lado ** 2
+
+    def perimetro(self):
+        return 4 * self.lado
+
+class TrianguloRectangulo:
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def hipotenusa(self):
+        return math.sqrt(self.base ** 2 + self.altura ** 2)
+
+    def area(self):
+        return (self.base * self.altura) / 2
+
+    def perimetro(self):
+        return self.base + self.altura + self.hipotenusa()
+
+    def tipo_triangulo(self):
+        a = self.base
+        b = self.altura
+        c = self.hipotenusa()
+
+        if a == b == c:
+            return "Equilátero"
+        elif a == b or a == c or b == c:
+            return "Isósceles"
+        else:
+            return "Escaleno"
+
+class Rombo:
+    def __init__(self, diagonal_mayor, diagonal_menor, lado):
+        self.diagonal_mayor = diagonal_mayor
+        self.diagonal_menor = diagonal_menor
+        self.lado = lado
+
+    def area(self):
+        return (self.diagonal_mayor * self.diagonal_menor) / 2
+
+    def perimetro(self):
+        return 4 * self.lado
+
+class Trapecio:
+    def __init__(self, base_mayor, base_menor, lado1, lado2, altura):
+        self.base_mayor = base_mayor
+        self.base_menor = base_menor
+        self.lado1 = lado1
+        self.lado2 = lado2
+        self.altura = altura
+
+    def area(self):
+        return ((self.base_mayor + self.base_menor) * self.altura) / 2
+
+    def perimetro(self):
+        return self.base_mayor + self.base_menor + self.lado1 + self.lado2
+
+print("----- CIRCULO -----")
+radio = float(input("Ingrese radio: "))
+c = Circulo(radio)
+print("Área:", round(c.area(), 2))
+print("Perímetro:", round(c.perimetro(), 2))
+
+print("\n----- RECTANGULO -----")
+base = float(input("Ingrese base: "))
+altura = float(input("Ingrese altura: "))
+r = Rectangulo(base, altura)
+print("Área:", r.area())
+print("Perímetro:", r.perimetro())
+
+print("\n----- CUADRADO -----")
+lado = float(input("Ingrese lado: "))
+cu = Cuadrado(lado)
+print("Área:", cu.area())
+print("Perímetro:", cu.perimetro())
+
+print("\n----- TRIANGULO RECTANGULO -----")
+base = float(input("Ingrese base: "))
+altura = float(input("Ingrese altura: "))
+t = TrianguloRectangulo(base, altura)
+print("Hipotenusa:", round(t.hipotenusa(), 2))
+print("Área:", t.area())
+print("Perímetro:", round(t.perimetro(), 2))
+print("Tipo:", t.tipo_triangulo())
+
+print("\n----- ROMBO -----")
+D = float(input("Diagonal mayor: "))
+d = float(input("Diagonal menor: "))
+lado = float(input("Lado: "))
+ro = Rombo(D, d, lado)
+print("Área:", ro.area())
+print("Perímetro:", ro.perimetro())
+
+print("\n----- TRAPECIO -----")
+B = float(input("Base mayor: "))
+b = float(input("Base menor: "))
+lado1 = float(input("Lado 1: "))
+lado2 = float(input("Lado 2: "))
+h = float(input("Altura: "))
+tr = Trapecio(B, b, lado1, lado2, h)
+print("Área:", tr.area())
+print("Perímetro:", tr.perimetro())
